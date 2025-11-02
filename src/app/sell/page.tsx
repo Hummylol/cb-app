@@ -1,11 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ArrowLeft, Upload, Camera, X, Plus } from 'lucide-react'
+import { ArrowLeft, Upload, X, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useProductsStore } from '@/lib/store'
@@ -137,7 +136,7 @@ export default function SellPage() {
             const fileExt = file.name.split('.').pop()
             const fileName = `${userId}/${Date.now()}_${i}.${fileExt}`
             
-            const { data, error } = await supabase.storage
+            const { error } = await supabase.storage
               .from('product-images')
               .upload(fileName, file)
             
@@ -206,7 +205,7 @@ export default function SellPage() {
         images: [],
         imagePreviews: []
       })
-    } catch (error) {
+    } catch {
       toast.error('Failed to list product. Please try again.')
     } finally {
       setIsSubmitting(false)

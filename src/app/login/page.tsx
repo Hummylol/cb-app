@@ -50,7 +50,7 @@ export default function LoginPage() {
           router.push('/')
         }, 300)
       }
-    } catch (err) {
+    } catch {
       toast.error('An unexpected error occurred. Please try again.')
       setIsLoading(false)
     }
@@ -152,7 +152,7 @@ export default function LoginPage() {
           {/* Sign up link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/signup" className="text-blue-600 font-semibold hover:text-blue-700 hover:underline">
                 Sign up
               </Link>

@@ -2,20 +2,6 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { supabase, Product } from './supabase'
 
-// Simple user ID generation that persists
-const getCurrentUserId = () => {
-  if (typeof window !== 'undefined') {
-    let userId = localStorage.getItem('current_user_id')
-    if (!userId) {
-      userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-      localStorage.setItem('current_user_id', userId)
-    }
-    return userId
-  }
-  // Fallback for server-side rendering
-  return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-}
-
 export interface CartItem {
   id: string
   product_id: string
