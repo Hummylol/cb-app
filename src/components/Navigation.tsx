@@ -67,12 +67,20 @@ export default function Navigation({ searchTerm, setSearchTerm }: NavigationProp
             {/* Desktop Navigation */}
             <div className="flex items-center space-x-2 md:space-x-4">
               {isSeller && (
-                <Link href="/sell">
-                  <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-2 hover:bg-blue-50 transition-colors rounded-xl">
-                    <Plus className="h-5 w-5 text-blue-600" />
-                    <span>Sell</span>
-                  </Button>
-                </Link>
+                <div className="hidden sm:flex items-center space-x-2">
+                  <Link href="/my-listings">
+                    <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-gray-50 transition-colors rounded-xl">
+                      <List className="h-5 w-5 text-gray-600" />
+                      <span>My Listings</span>
+                    </Button>
+                  </Link>
+                  <Link href="/sell">
+                    <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-blue-50 transition-colors rounded-xl">
+                      <Plus className="h-5 w-5 text-blue-600" />
+                      <span>Sell</span>
+                    </Button>
+                  </Link>
+                </div>
               )}
               <Link href="/wishlist">
                 <Button variant="ghost" size="sm" className="relative hover:bg-red-50 transition-colors rounded-xl p-2">

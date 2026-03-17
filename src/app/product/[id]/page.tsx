@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { ArrowLeft, ShoppingCart, Heart, Share2, Star, Phone, MapPin, QrCode, Info, Truck, Shield, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -22,6 +22,11 @@ export default function ProductPage() {
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore()
   const { fetchProducts, products } = useProductsStore()
   const params = useParams()
+
+  const stats = useMemo(() => ({
+    rating: (Math.random() * (5 - 3) + 3).toFixed(1),
+    reviews: Math.floor(Math.random() * (200 - 20) + 20)
+  }), [])
 
   const fetchProduct = useCallback(async (id: string) => {
     try {
@@ -209,10 +214,10 @@ export default function ProductPage() {
                 <div className="flex items-center">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
+                      <Star key={i} className={`h-5 w-5 ${i < Math.floor(Number(stats.rating)) ? 'fill-current' : 'text-gray-300'}`} />
                     ))}
                   </div>
-                  <span className="ml-2 text-sm text-gray-600">(4.8) 124 reviews</span>
+                  <span className="ml-2 text-sm text-gray-600">({stats.rating}) {stats.reviews} reviews</span>
                 </div>
                 <Badge variant="outline" className="text-green-600 border-green-200">
                   In Stock
@@ -265,37 +270,37 @@ export default function ProductPage() {
             <div className="space-y-6">
               {/* Rental Period Selection */}
               <div>
-                <span className="text-lg font-medium text-gray-700 mb-3 block">Rental Period:</span>
-                <div className="grid grid-cols-3 gap-2">
+                <span className="text-lg font-bold text-gray-900 mb-4 block tracking-tight">Select Rental Period</span>
+                <div className="grid grid-cols-3 gap-3">
                   <button
                     onClick={() => setRentalPeriod('daily')}
-                    className={`p-3 rounded-lg border text-center transition-colors ${rentalPeriod === 'daily'
-                      ? 'bg-blue-500 text-white border-blue-500'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
+                    className={`p-4 rounded-2xl border-2 text-center transition-all duration-300 ${rentalPeriod === 'daily'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-xl shadow-blue-200 scale-105'
+                      : 'bg-white text-gray-700 border-gray-100 hover:border-blue-200 hover:bg-blue-50/30'
                       }`}
                   >
-                    <div className="font-medium">Daily</div>
-                    <div className="text-xs opacity-75">₹{product.price.toFixed(2)}/day</div>
+                    <div className="font-bold text-sm">Daily</div>
+                    <div className={`text-xs mt-1 ${rentalPeriod === 'daily' ? 'opacity-90' : 'text-gray-400 font-medium'}`}>₹{product.price.toFixed(0)}</div>
                   </button>
                   <button
                     onClick={() => setRentalPeriod('weekly')}
-                    className={`p-3 rounded-lg border text-center transition-colors ${rentalPeriod === 'weekly'
-                      ? 'bg-blue-500 text-white border-blue-500'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
+                    className={`p-4 rounded-2xl border-2 text-center transition-all duration-300 ${rentalPeriod === 'weekly'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-xl shadow-blue-200 scale-105'
+                      : 'bg-white text-gray-700 border-gray-100 hover:border-blue-200 hover:bg-blue-50/30'
                       }`}
                   >
-                    <div className="font-medium">Weekly</div>
-                    <div className="text-xs opacity-75">₹{(product.price * 7 * 0.8).toFixed(2)}/week</div>
+                    <div className="font-bold text-sm">Weekly</div>
+                    <div className={`text-xs mt-1 ${rentalPeriod === 'weekly' ? 'opacity-90' : 'text-gray-400 font-medium'}`}>₹{(product.price * 7 * 0.8).toFixed(0)}</div>
                   </button>
                   <button
                     onClick={() => setRentalPeriod('monthly')}
-                    className={`p-3 rounded-lg border text-center transition-colors ${rentalPeriod === 'monthly'
-                      ? 'bg-blue-500 text-white border-blue-500'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
+                    className={`p-4 rounded-2xl border-2 text-center transition-all duration-300 ${rentalPeriod === 'monthly'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-xl shadow-blue-200 scale-105'
+                      : 'bg-white text-gray-700 border-gray-100 hover:border-blue-200 hover:bg-blue-50/30'
                       }`}
                   >
-                    <div className="font-medium">Monthly</div>
-                    <div className="text-xs opacity-75">₹{(product.price * 30 * 0.7).toFixed(2)}/month</div>
+                    <div className="font-bold text-sm">Monthly</div>
+                    <div className={`text-xs mt-1 ${rentalPeriod === 'monthly' ? 'opacity-90' : 'text-gray-400 font-medium'}`}>₹{(product.price * 30 * 0.7).toFixed(0)}</div>
                   </button>
                 </div>
               </div>
@@ -352,21 +357,21 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              <div className="flex space-x-4">
+              <div className="flex gap-4">
                 <Button
                   onClick={handleAddToCart}
                   disabled={product.stock_quantity === 0 || isAddingToCart}
-                  className="flex-1 h-12 text-lg font-semibold"
+                  className="flex-[2] h-16 text-xl font-black rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white shadow-[0_20px_50px_rgba(37,_99,_235,_0.3)] transition-all duration-300 hover:translate-y-[-2px] active:scale-95 disabled:opacity-50 disabled:translate-y-0"
                   size="lg"
                 >
                   {isAddingToCart ? (
                     <div className="flex items-center">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
                       Adding...
                     </div>
                   ) : (
-                    <div className="flex items-center">
-                      <ShoppingCart className="h-5 w-5 mr-2" />
+                    <div className="flex items-center justify-center">
+                      <ShoppingCart className="h-6 w-6 mr-3" />
                       {product.stock_quantity === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </div>
                   )}
@@ -374,10 +379,10 @@ export default function ProductPage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className={`h-12 w-12 ${isInWishlist(product.id) ? 'text-red-500 border-red-200' : ''}`}
+                  className={`flex-1 h-16 rounded-2xl border-gray-100 shadow-xl shadow-gray-100 transition-all duration-300 hover:bg-red-50 hover:border-red-100 group ${isInWishlist(product.id) ? 'text-red-500 border-red-100 bg-red-50' : 'text-gray-400'}`}
                   onClick={handleWishlistToggle}
                 >
-                  <Heart className={`h-5 w-5 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
+                  <Heart className={`h-7 w-7 transition-transform group-hover:scale-110 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
                 </Button>
               </div>
             </div>

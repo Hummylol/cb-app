@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useWishlistStore, Product } from '@/lib/store'
+import { useMemo } from 'react'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,6 +38,11 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       toast.success('Added to wishlist')
     }
   }
+
+  const stats = useMemo(() => ({
+    rating: (Math.random() * (5 - 3) + 3).toFixed(1),
+    reviews: Math.floor(Math.random() * (200 - 20) + 20)
+  }), [])
 
   return (
     <Card className="group relative bg-white/40 backdrop-blur-sm border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-3xl shadow-lg">
@@ -91,10 +97,10 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         <div className="flex items-center gap-2 mb-6">
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`h-3.5 w-3.5 ${i < 4 ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200'}`} />
+              <Star key={i} className={`h-3.5 w-3.5 ${i < Math.floor(Number(stats.rating)) ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200'}`} />
             ))}
           </div>
-          <span className="text-xs font-bold text-gray-400">4.8</span>
+          <span className="text-xs font-bold text-gray-400">{stats.rating} ({stats.reviews})</span>
         </div>
 
         <div className="flex items-center justify-between gap-4">
