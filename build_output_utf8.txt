@@ -1,0 +1,341 @@
+﻿   Γû▓ Next.js 15.5.4
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+node.exe :  ΓÜá 
+Attempted to load @next
+/swc-win32-x64-msvc, 
+but an error occurred: 
+A dynamic link library 
+(DLL) initialization 
+routine failed.
+At C:\Program Files\nod
+ejs\npx.ps1:29 char:3
++   & $NODE_EXE 
+$NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: ( ΓÜá Attempte   
+ d ...routine faile    
+d.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+\\?\C:\Users\Hummy\Down
+loads\cb-app-main\node_
+modules\@next\swc-win32
+-x64-msvc\next-swc.win3
+2-x64-msvc.node
+ ΓÜá Attempted to load 
+@next/swc-win32-x64-msv
+c, but an error 
+occurred: A dynamic 
+link library (DLL) 
+initialization routine 
+failed.
+\\?\C:\Users\Hummy\Down
+loads\cb-app-main\node_
+modules\@next\swc-win32
+-x64-msvc\next-swc.win3
+2-x64-msvc.node
+ ΓÜá Attempted to load 
+@next/swc-win32-x64-msv
+c, but an error 
+occurred: A dynamic 
+link library (DLL) 
+initialization routine 
+failed.
+\\?\C:\Users\Hummy\Down
+loads\cb-app-main\node_
+modules\@next\swc-win32
+-x64-msvc\next-swc.win3
+2-x64-msvc.node
+ Γ£ô Compiled successfully in 2.9s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/app/my-listings/p
+age.tsx
+4:29  Warning: 'Edit' 
+is defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+6:29  Warning: 
+'CardHeader' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+6:41  Warning: 
+'CardTitle' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+8:37  Warning: 
+'useCartStore' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+18:60  Warning: 
+'storeLoading' is 
+assigned a value but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+19:26  Warning: 
+'authLoading' is 
+assigned a value but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+25:6  Warning: React 
+Hook useEffect has a 
+missing dependency: 
+'fetchMyProducts'. 
+Either include it or 
+remove the dependency 
+array.  react-hooks/exh
+austive-deps
+113:76  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/app/my-rentals/pa
+ge.tsx
+11:29  Warning: 
+'Clock' is defined but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+11:51  Warning: 
+'QrCode' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+11:59  Warning: 
+'ArrowRight' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+48:72  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+109:94  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+159:61  Warning: Using 
+`<img>` could result 
+in slower LCP and 
+higher bandwidth. 
+Consider using `<Image 
+/>` from `next/image` 
+or a custom image 
+loader to 
+automatically optimize 
+images. This may incur 
+additional usage or 
+cost from your 
+provider. See: https://
+nextjs.org/docs/message
+s/no-img-element  @next
+/next/no-img-element
+
+./src/app/page.tsx
+11:10  Warning: 
+'Badge' is defined but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+12:8  Warning: 'Link' 
+is defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+261:26  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/app/product/[id]/
+page.tsx
+4:92  Warning: 
+'ChevronLeft' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+4:105  Warning: 
+'ChevronRight' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+22:11  Warning: 
+'addItem' is assigned 
+a value but never 
+used.  @typescript-esli
+nt/no-unused-vars
+25:33  Warning: 
+'rentingLoading' is 
+assigned a value but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+34:6  Warning: React 
+Hook useEffect has a 
+missing dependency: 
+'fetchProduct'. Either 
+include it or remove 
+the dependency array.  
+react-hooks/exhaustive-
+deps
+469:25  Warning: Using 
+`<img>` could result 
+in slower LCP and 
+higher bandwidth. 
+Consider using `<Image 
+/>` from `next/image` 
+or a custom image 
+loader to 
+automatically optimize 
+images. This may incur 
+additional usage or 
+cost from your 
+provider. See: https://
+nextjs.org/docs/message
+s/no-img-element  @next
+/next/no-img-element
+
+./src/app/sell/page.tsx
+4:66  Warning: 
+'AlignLeft' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+4:83  Warning: 
+'HelpCircle' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+7:29  Warning: 
+'CardHeader' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+7:41  Warning: 
+'CardTitle' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+7:52  Warning: 
+'CardDescription' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+246:25  Warning: Using 
+`<img>` could result 
+in slower LCP and 
+higher bandwidth. 
+Consider using `<Image 
+/>` from `next/image` 
+or a custom image 
+loader to 
+automatically optimize 
+images. This may incur 
+additional usage or 
+cost from your 
+provider. See: https://
+nextjs.org/docs/message
+s/no-img-element  @next
+/next/no-img-element
+392:27  Warning: Using 
+`<img>` could result 
+in slower LCP and 
+higher bandwidth. 
+Consider using `<Image 
+/>` from `next/image` 
+or a custom image 
+loader to 
+automatically optimize 
+images. This may incur 
+additional usage or 
+cost from your 
+provider. See: https://
+nextjs.org/docs/message
+s/no-img-element  @next
+/next/no-img-element
+
+./src/app/seller/rental
+s/page.tsx
+8:16  Warning: 
+'CardContent' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+12:10  Warning: 
+'Package' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+12:36  Warning: 
+'MapPin' is defined 
+but never used.  @types
+cript-eslint/no-unused-
+vars
+12:44  Warning: 
+'Phone' is defined but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+49:18  Warning: 
+'error' is defined but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+
+./src/components/Produc
+tCard.tsx
+3:50  Warning: 
+'ShieldCheck' is 
+defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+19:38  Warning: 
+'addToCart' is 
+assigned a value but 
+never used.  @typescrip
+t-eslint/no-unused-vars
+
+./src/lib/store.ts
+243:12  Error: 
+Unexpected any. 
+Specify a different 
+type.  @typescript-esli
+nt/no-explicit-any
+244:18  Error: 
+Unexpected any. 
+Specify a different 
+type.  @typescript-esli
+nt/no-explicit-any
+252:59  Warning: 'get' 
+is defined but never 
+used.  @typescript-esli
+nt/no-unused-vars
+356:21  Error: 
+Unexpected any. 
+Specify a different 
+type.  @typescript-esli
+nt/no-explicit-any
+
+info  - Need to 
+disable some ESLint 
+rules? Learn more 
+here: https://nextjs.or
+g/docs/app/api-referenc
+e/config/eslint#disabli
+ng-rules
