@@ -151,11 +151,13 @@ export const useProductsStore = create<ProductsStore>()((set, get) => ({
         } catch (error) {
             console.error('Error fetching products:', error)
             try {
-                const localProducts = localStorage.getItem('products-storage')
-                if (localProducts) {
-                    const parsed = JSON.parse(localProducts)
-                    if (parsed.state && parsed.state.products) {
-                        set({ products: parsed.state.products })
+                if (typeof window !== 'undefined') {
+                    const localProducts = localStorage.getItem('products-storage')
+                    if (localProducts) {
+                        const parsed = JSON.parse(localProducts)
+                        if (parsed.state && parsed.state.products) {
+                            set({ products: parsed.state.products })
+                        }
                     }
                 }
             } catch (localError) {
