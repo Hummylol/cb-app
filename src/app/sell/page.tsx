@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ArrowLeft, Upload, X, Plus, MapPin, QrCode, Phone, Tag, AlignLeft, Info } from 'lucide-react'
+import { ArrowLeft, Upload, X, Plus, MapPin, QrCode, Phone, Tag, AlignLeft, Info, Map } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
@@ -21,6 +21,7 @@ interface ProductForm {
   rentalPrice: string
   contactNumber: string
   address: string
+  mapLink: string
   additionalDetails: string
   images: File[]
   imagePreviews: string[]
@@ -52,6 +53,7 @@ export default function SellPage() {
     rentalPrice: '',
     contactNumber: '',
     address: '',
+    mapLink: '',
     additionalDetails: '',
     images: [],
     imagePreviews: [],
@@ -70,6 +72,29 @@ export default function SellPage() {
 
   const handleInputChange = (field: keyof ProductForm, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error('Geolocation is not supported by your browser')
+      return
+    }
+
+    const toastId = toast.loading('Fetching location...')
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords
+        const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`
+        setFormData(prev => ({ ...prev, mapLink: mapUrl }))
+        toast.success('Location fetched successfully!', { id: toastId })
+      },
+      (error) => {
+        console.error(error)
+        toast.error('Failed to get location. Please allow location access.', { id: toastId })
+      },
+      { timeout: 10000, enableHighAccuracy: true }
+    )
   }
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -172,6 +197,10 @@ export default function SellPage() {
         upiQrUrl = await uploadFile(formData.upiQr, 'upi_qr') as string
       }
 
+      const finalAddress = formData.mapLink
+        ? `${formData.address}\n\nGoogle Maps Link: ${formData.mapLink}`
+        : formData.address
+
       await addProduct({
         name: formData.name,
         description: formData.description,
@@ -181,7 +210,7 @@ export default function SellPage() {
         images: imageUrls,
         seller_id: userId,
         contact_number: formData.contactNumber,
-        address: formData.address,
+        address: finalAddress,
         upi_qr: upiQrUrl,
         additional_details: formData.additionalDetails
       })
@@ -350,22 +379,50 @@ export default function SellPage() {
 
               <Card className="border-slate-200 shadow-sm">
                 <CardContent className="p-6 space-y-8">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium text-slate-700">Pickup Address <span className="text-red-500">*</span></label>
-                      <div className="flex items-center text-[10px] text-slate-400 uppercase tracking-widest">
-                        <Info className="h-3 w-3 mr-1" />
-                        Visible to buyers
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="text-sm font-medium text-slate-700">Pickup Address <span className="text-red-500">*</span></label>
+                        <div className="flex items-center text-[10px] text-slate-400 uppercase tracking-widest">
+                          <Info className="h-3 w-3 mr-1" />
+                          Visible to buyers
+                        </div>
                       </div>
+                      <textarea
+                        className="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="e.g. Flat 402, Sunshine Apts, Near Hitech City Metro, Hyderabad"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        required
+                      />
                     </div>
-                    <textarea
-                      className="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="e.g. Flat 402, Sunshine Apts, Near Hitech City Metro, Hyderabad"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      required
-                    />
-                    <p className="text-[10px] text-slate-400 italic">This address will be used to generate a Google Maps link for the buyer.</p>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="text-sm font-medium text-slate-700">Google Maps Link</label>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleGetLocation}
+                          className="h-6 px-2 text-[10px] font-bold text-blue-600 hover:bg-blue-50 uppercase tracking-wider"
+                        >
+                          <MapPin className="h-3 w-3 mr-1" />
+                          Get Current Location
+                        </Button>
+                      </div>
+                      <div className="relative">
+                        <Map className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <Input
+                          type="url"
+                          placeholder="https://maps.google.com/..."
+                          className="pl-10 border-slate-200 focus-visible:ring-blue-500 h-11"
+                          value={formData.mapLink}
+                          onChange={(e) => handleInputChange('mapLink', e.target.value)}
+                        />
+                      </div>
+                      <p className="text-[10px] text-slate-400 italic">Paste a maps link or click the button above to auto-fill.</p>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
